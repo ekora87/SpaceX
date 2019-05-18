@@ -1,0 +1,85 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('https://www.spacex.com/sites/spacex/files/asiasat6_outside_pad_close_v.jpg');
+    /* background-image: url('https://www.humansinspace.org/wp/wp-content/uploads/2014/02/spacex-falcon-9-upgrade-version-pad.jpg'); */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    color: black;
+  }
+  
+  .mission-patch {
+    width: 200px;
+    height: 200px;
+    margin: 5px;
+  }
+  
+  h3 {
+    margin: 0;
+    padding: 10px 0;
+  }
+  
+  .mission{
+    height: auto;
+  }
+  
+  .mission-container {
+    width: 300px;
+  }
+  .mission-container, .mission-details {
+    border: 2px solid #22328F;
+    border-radius: 5px;
+    margin: 20px auto;
+  }
+  
+  .mission-details {
+    line-height: 2em;
+    background-color: black;
+    color: white;
+  }
+  
+  .flight-number {
+    background-color: #22328F;
+    color: white;
+  }
+  
+  .mission-images > img {
+    width: 300px;
+    height: 300px;
+    margin-left: 0;
+  }
+  
+  .mission-images {
+    margin: 0;
+  }
+  
+  ul {
+    list-style-type: none;
+    text-align: left;
+  }
+  
+  li {
+    margin: 5px 0;
+  }
+  
+  .bold-text {
+    font-weight: bold;
+    padding-right: 3px;
+  }
+  
+  .aTag > img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .individual-mission {
+    margin: 0 auto;
+  }
