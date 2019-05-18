@@ -29,6 +29,10 @@
   .mission{
     height: auto;
   }
+
+  .mission > a {
+    text-decoration: none;
+  }
   
   .mission-container {
     width: 300px;
@@ -48,6 +52,10 @@
   .flight-number {
     background-color: #22328F;
     color: white;
+  }
+
+  .mission-name {
+    color: black;
   }
   
   .mission-images > img {
