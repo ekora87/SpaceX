@@ -7,11 +7,13 @@ function getMissionPatch() {
   }
   
   function displayMissionPatch(responseJson) {
-    for (let i=0; i<responseJson.length; i++ ){
+    
+    for (let i=0; i < responseJson.length; i++ ){
       if (responseJson[i].links.mission_patch !== null) {
-       $('.mission').append(`<a href="mission.html"><div class="mission-container" id="${responseJson[i].flight_number - 1}"><h3 class="flight-number">Flight Number ${responseJson[i].flight_number}</h3><h3 class="mission-name">${responseJson[i].mission_name}</h3><img src="${responseJson[i].links.mission_patch}" class="mission-patch"></div></a>`);
+       $('.mission').append(`<a href="mission.html"><div class="mission-container" id="${responseJson[i].flight_number - 1}"><h3 class="flight-number">Flight Number ${responseJson[i].flight_number}</h3><h4 class="mission-name">${responseJson[i].mission_name}</h4><img src="${responseJson[i].links.mission_patch}" class="mission-patch"></div></a>`);
     }
     }
+    
   }
 
 

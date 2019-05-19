@@ -3,12 +3,15 @@
   }
   
   body {
-    /* background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('https://www.spacex.com/sites/spacex/files/asiasat6_outside_pad_close_v.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed; */
-    width: 80%;
+   
+    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('http://i.imgur.com/Nssk73Q.png');
+  
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  
+    width: 100%;
     margin: 0 auto;
     text-align: center;
     font-family: 'Lato', sans-serif;
@@ -26,8 +29,8 @@
     padding: 10px 0;
   }
   
-  .mission{
-    height: auto;
+  .mission, .mission-details {
+    margin-top: 150px;
   }
 
   .mission > a {
@@ -36,21 +39,23 @@
   
   .mission-container {
     width: 300px;
+    height: 320px;
+    margin: 20px auto;
   }
   .mission-container, .mission-details {
-    border: 2px solid #22328F;
+    border: 2px solid #005288;
     border-radius: 5px;
-    margin: 20px auto;
   }
   
   .mission-details {
     line-height: 2em;
     background-color: black;
     color: white;
+    margin-bottom: 20px;
   }
   
   .flight-number {
-    background-color: #22328F;
+    background-color: #005288;
     color: white;
   }
 
@@ -59,7 +64,7 @@
   }
   
   .mission-images > img {
-    width: 300px;
+    width: 100%;
     height: 300px;
     margin-left: 0;
   }
@@ -71,6 +76,8 @@
   ul {
     list-style-type: none;
     text-align: left;
+    padding-left: 0;
+    margin: 0 5px;
   }
   
   li {
@@ -89,4 +96,34 @@
   
   .individual-mission {
     margin: 0 auto;
+  }
+
+  @media only screen and (min-width: 768px) {
+    body {
+      width: 90%;
+    }
+    
+    .mission {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 200px;
+    }
+
+    .individual-mission {
+      margin-top: 200px;
+    }
+
+    .mission-images > img {
+      width: 80%;
+      height: auto;
+      margin-left: 0;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .mission-details {
+      margin-top: 250px;
+    }
   }
