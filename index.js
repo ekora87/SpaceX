@@ -1,7 +1,7 @@
 //let state = getMissionPatch();
 let local = localStorage.getItem('index');
 let slideIndex = 1;
-const apiKey = 'AIzaSyBMR9n_sJiBHqYh0vGx2jYS13LDC13B9TI'; 
+const apiKey = 'AIzaSyDXusl38haaZY6PfuJdEuBb-bpdFkceYYg'; 
 const searchURL = 'https://www.googleapis.com/youtube/v3/search';
 let missionName = "";
 function getMissionPatch() {
@@ -113,6 +113,9 @@ function formatQueryParams(params) {
 function displayResults(responseJson) {
   // if there are previous results, remove them
   console.log(responseJson);
+  $('.youtube-link').click(function() {
+    $(this).attr('href', `https://www.youtube.com/results?search_query=${missionName}`);
+  });
   $('#results-list').empty();
   // iterate through the items array
   for (let i = 0; i < responseJson.items.length; i++){
