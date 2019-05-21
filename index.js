@@ -42,7 +42,7 @@ function displayMissionPatch(responseJson) {
       responseJson.rocket.first_stage.cores[0].land_success = "False";
       responseJson.details = "None";
     }
-    $('.individual-mission').prepend(`<div class="mission-details">
+    $('.individual-mission').prepend(`<img src="${responseJson.links.mission_patch_small}"><div class="mission-details">
     <h3 class="name">${responseJson.mission_name}</h3>
     <ul><li><span class="bold-text">Flight Numer:</span> ${responseJson.flight_number}</li>
     <li><span class="bold-text">Launch Year:</span> ${responseJson.launch_year}</li>
