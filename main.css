@@ -161,7 +161,7 @@
 }
 
 .video-image-container {
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 .video-container > h3 {
   margin-bottom: 0;
@@ -193,7 +193,7 @@
 }
 
 hr {
-  color: black;
+  border-top: 1px solid black;
 }
 
   @media only screen and (min-width: 768px) {

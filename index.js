@@ -52,7 +52,7 @@ function displayMissionPatch(responseJson) {
     <li><span class="bold-text">Launch Success:</span> ${responseJson.launch_success}</li>
     <li><span class="bold-text">Land Success:</span> ${responseJson.rocket.first_stage.cores[0].land_success}</li>
     <li><span class="bold-text">Details:</span> ${responseJson.details}</li>
-    </ul></div>`);
+    </ul></div><hr>`);
 
     if (imageCount > 0) {
         $('.mission-images').append(`
