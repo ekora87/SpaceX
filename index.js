@@ -1,6 +1,9 @@
 //let state = getMissionPatch();
 let local = localStorage.getItem('index');
 let slideIndex = 1;
+const apiKey = 'AIzaSyBMR9n_sJiBHqYh0vGx2jYS13LDC13B9TI'; 
+const searchURL = 'https://www.googleapis.com/youtube/v3/search';
+let missionName = "";
 function getMissionPatch() {
     fetch('https://api.spacexdata.com/v3/launches')
     .then(response => response.json())
@@ -31,21 +34,14 @@ function displayMissionPatch(responseJson) {
   }
   
   function displayMissionDetail(responseJson) {
-    $('.mission-images').append(`<div class="slide-control"><a class="prev" onclick="plusSlides(-1)">PREV</a>
-    <span class="numbertext"></span>
-    <a class="next" onclick="plusSlides(1)">NEXT</a></div>`);
+    missionName = responseJson.mission_name;
     let imageCount = responseJson.links.flickr_images.length;
-    if (imageCount > 0) {
-      for (let i=0; i < imageCount; i++) {
-        
-        $('.mission-images').append(`<div class="mySlides fade">
-        <img class="images" src="${responseJson.links.flickr_images[i]}">
-        </div>
 
-        `);
-      }
+    if ((responseJson.launch_success == null) || (responseJson.rocket.first_stage.cores[0].land_success == null) || (responseJson.details == null)) {
+      responseJson.launch_success = "False";
+      responseJson.rocket.first_stage.cores[0].land_success = "False";
+      responseJson.details = "None";
     }
-    showSlides(slideIndex);
     $('.individual-mission').prepend(`<div class="mission-details">
     <h3 class="name">${responseJson.mission_name}</h3>
     <ul><li><span class="bold-text">Flight Numer:</span> ${responseJson.flight_number}</li>
@@ -53,19 +49,35 @@ function displayMissionPatch(responseJson) {
     <li><span class="bold-text">Launch Date:</span> ${responseJson.launch_date_local}</li>
     <li><span class="bold-text">Rocket Name:</span> ${responseJson.rocket.rocket_name}</li>
     <li><span class="bold-text">Launch Site:</span> ${responseJson.launch_site.site_name_long}</li>
-    <li><span class="bold-text">Launch Sucess:</span> ${responseJson.launch_success}</li>
-    <li><span class="bold-text">Video:</span> <a href="${responseJson.links.video_link}" target="_blank">YouTube Video</a></li>
+    <li><span class="bold-text">Launch Success:</span> ${responseJson.launch_success}</li>
+    <li><span class="bold-text">Land Success:</span> ${responseJson.rocket.first_stage.cores[0].land_success}</li>
     <li><span class="bold-text">Details:</span> ${responseJson.details}</li>
     </ul></div>`);
+
+    if (imageCount > 0) {
+        $('.mission-images').append(`
+        <div class="slide-control">
+        <a class="prev" onclick="plusSlides(-1)">PREV</a>
+        <span class="numbertext"></span>
+        <a class="next" onclick="plusSlides(1)">NEXT</a>
+        </div>`);
+        
+        for (let i=0; i < imageCount; i++) {
+          $('.mission-images').append(`
+          <div class="mySlides fade">
+          <img class="images" src="${responseJson.links.flickr_images[i]}">
+          </div>`);
+        }
+        showSlides(slideIndex);
+        $('#m-images').removeClass('hidden');
+      }
+    watchForm();
   }
   
 // window.onpopstate = function (event) {
 //   if (event.state) { state = event.state; }
 //   render(state);
 // };
-
-
-
 
 
 function plusSlides(n) {
@@ -86,12 +98,65 @@ function showSlides(n) {
   for (let i =0; i < slides.length; i++) {
       slides[i].style.display = "none";  
   }
-//   for (i = 0; i < dots.length; i++) {
-//       dots[i].className = dots[i].className.replace(" active", "");
-//   }
+
 slides[slideIndex - 1].style.display = "block";  
 $('.numbertext').text(`${n}/${slides.length}`);
-//   dots[slideIndex-1].className += " active";
+}
+
+//Youtube API Script
+function formatQueryParams(params) {
+  const queryItems = Object.keys(params)
+    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+  return queryItems.join('&');
+}
+
+function displayResults(responseJson) {
+  // if there are previous results, remove them
+  console.log(responseJson);
+  $('#results-list').empty();
+  // iterate through the items array
+  for (let i = 0; i < responseJson.items.length; i++){
+    // for each video object in the items 
+    //array, add a list item to the results 
+    //list with the video title, description,
+    //and thumbnail
+    $('#results-list').append(
+      `<div class="video"><li><h3>${responseJson.items[i].snippet.title}</h3>
+      <p>${responseJson.items[i].snippet.description}</p>
+      <a href="https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}" target="_blank"><img class="video-link" src='${responseJson.items[i].snippet.thumbnails.medium.url}'></a>
+      </li></div>`
+    )};
+    $('#results').removeClass('hidden');
+};
+
+function getYouTubeVideos(query, maxResults=10) {
+  const params = {
+    key: apiKey,
+    q: query,
+    part: 'snippet',
+    maxResults,
+    type: 'video'
+  };
+  const queryString = formatQueryParams(params)
+  const url = searchURL + '?' + queryString;
+
+  console.log(url);
+
+  fetch(url)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response.statusText);
+    })
+    .then(responseJson => displayResults(responseJson))
+    .catch(err => {
+      $('#js-error-message').text(`Something went wrong: ${err.message}`);
+    });
+}
+
+function watchForm() {
+    getYouTubeVideos("spaceX " + missionName, 2);
 }
   
   $(function() {

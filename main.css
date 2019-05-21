@@ -54,7 +54,7 @@
     margin-bottom: 20px;
   }
   
-  .flight-number, .name{
+  .flight-number, .name, h2{
     background-color: #005288;
     color: white;
   }
@@ -75,14 +75,14 @@
     width: 100%;
   }
   
-  ul {
+  .mission-details > ul {
     list-style-type: none;
     text-align: left;
     padding-left: 0;
     margin: 0 5px;
   }
   
-  li {
+  .mission-details > li {
     margin: 5px 0;
   }
   
@@ -99,8 +99,9 @@
 
 
 
-.mySlides {display: none;}
-
+.mySlides {
+  display: none;
+}
 
 .images {
     width: 100%;
@@ -159,6 +160,37 @@
   to {opacity: 1}
 }
 
+h2 {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 20px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.video-container {
+  width: 100%;
+  max-height: 700px;
+  margin-top: 20px;
+}
+
+.video {
+  border: 1px solid black;
+  background-color: white;
+  padding-bottom: 20px;
+}
+
+#results-list {
+  height: auto;
+  list-style-type: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.hidden {
+  display: none;
+}
+
   @media only screen and (min-width: 768px) {
     body {
       width: 90%;
@@ -189,12 +221,26 @@
     }
 
     .mission-images {
-        
-        width: 40%;
+      width: 400px;
     }
+
     .images {
         width: 100%;
-        max-width: 100%;
-        height: auto;
+        height: 100%;
+    }
+
+    .video-container {
+      width: 500px;
+      margin-top: 0;
+    }
+
+   
+
+    .video-image-container {
+      height: 700px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
     }
   }
