@@ -87,8 +87,9 @@
   }
   
   .bold-text {
-    font-weight: bold;
+    font-weight: bolder;
     padding-right: 3px;
+    color: grey;
   }
   
     
